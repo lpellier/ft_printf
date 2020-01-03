@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 10:56:23 by lpellier          #+#    #+#             */
-/*   Updated: 2019/12/21 16:11:20 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/03 14:40:32 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,25 +90,23 @@ int		ft_printf(const char *format, ...)
 	va_list		ap;
 	const char	*test;
 	int			i;
-	int			count;
 	t_printf	*info;
 	int			written;
 
-	count = count_format(format);
-	if (!(info = (t_printf *)malloc(sizeof(t_printf) * count)))
+	if (!(info = (t_printf *)malloc(sizeof(t_printf) * count_format(format))))
 		return (-1);
+	info->count = count_format(format);
 	info->outputlen = 0;
 	i = 0;
 	va_start(ap, format);
 	test = print_boutsider(format, info);
-	while (i < count)
+	while (i++ < info->count)
 	{
 		ft_init_info(info);
 		test = ft_fill_struct(&(*test), info, ap);
 		ft_output(info, ap);
 		test = print_aoutsider(test, info);
 		test++;
-		i++;
 	}
 	va_end(ap);
 	written = info->outputlen;

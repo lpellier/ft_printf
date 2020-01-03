@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 10:29:31 by lpellier          #+#    #+#             */
-/*   Updated: 2019/12/21 15:16:24 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/03 13:54:51 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,5 @@ const char	*ft_fill_struct(const char *format, t_printf *info, va_list ap)
 	format = checkwidth(&(*format), info, ap);
 	format = checkprecision(&(*format), info, ap);
 	format = checktype(&(*format), info);
-//	printf("%s%d\n", "width = ", info->width);
-//	printf("%s%d\n", "precision = ", info->precision);
-//	printf("%s%d\n", "padding = ", info->padding);
-//	printf("%s%c\n", "type = ", info->type);
 	return (&(*format));
 }

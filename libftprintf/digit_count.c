@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lu_hexmin.c                                     :+:      :+:    :+:   */
+/*   digit_count.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/21 14:40:26 by lpellier          #+#    #+#             */
-/*   Updated: 2019/12/26 14:26:38 by lpellier         ###   ########.fr       */
+/*   Created: 2019/12/21 15:39:01 by lpellier          #+#    #+#             */
+/*   Updated: 2020/01/03 16:44:03 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_lu_hexmin(long unsigned int n)
+size_t		digit_count(long value, int base)
 {
-	char			*res;
-	char			*tab;
-	int				i;
+	size_t i;
 
 	i = 0;
-	tab = "0123456789abcdef";
-	if (!(res = malloc(sizeof(char) * digit_count(n, 16) + 1)))
-		return (NULL);
-	while (n > 16)
+	value = (value < 0 ? -value : value);
+	while (value)
 	{
-		res[i] = tab[n % 16];
-		n /= 16;
+		value /= base;
 		i++;
 	}
-	res[i] = tab[n];
-	return (ft_strrev(res));
+	return (i);
 }

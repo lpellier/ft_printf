@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_lu_hexmin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 11:35:23 by lpellier          #+#    #+#             */
-/*   Updated: 2019/11/18 11:47:24 by lpellier         ###   ########.fr       */
+/*   Created: 2019/12/21 14:40:26 by lpellier          #+#    #+#             */
+/*   Updated: 2019/12/26 15:38:14 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strlen(const char *s)
+char	*ft_lu_hexmin(long unsigned int n)
 {
-	int i;
+	char			*res;
+	char			*tab;
+	int				i;
 
-	if (s == NULL)
-		return (0);
 	i = 0;
-	while (s[i])
+	tab = "0123456789abcdef";
+	if (!(res = malloc(sizeof(char) * digit_count(n, 16) + 1)))
+		return (NULL);
+	if (n > 16)
 	{
-		i++;
+		while (n > 16)
+		{
+			res[i] = tab[n % 16];
+			n /= 16;
+			i++;
+		}
 	}
-	return (i);
+	res[i] = tab[n];
+	return (ft_strrev(res));
 }
