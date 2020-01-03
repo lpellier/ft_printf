@@ -6,11 +6,22 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 10:29:31 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/03 13:54:51 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/03 17:49:41 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+
+const char	*init_perc(t_printf *info, const char *format)
+{
+	info->type = 'c';
+	info->number = 0;
+	info->perc += 1;
+	printf("format before = %s\n", format);
+	format += 2;
+	printf("format = %s\n", format);
+	return (format);
+}
 
 const char	*checkflags(const char *format, t_printf *info)
 {
@@ -31,7 +42,7 @@ const char	*checkflags(const char *format, t_printf *info)
 			info->padding = 2;
 		format++;
 	}
-	return (&(*format));
+	return (format);
 }
 
 const char	*checkwidth(const char *format, t_printf *info, va_list ap)
@@ -49,7 +60,7 @@ const char	*checkwidth(const char *format, t_printf *info, va_list ap)
 		info->width = va_arg(ap, int);
 		format++;
 	}
-	return (&(*format));
+	return (format);
 }
 
 const char	*checkprecision(const char *format, t_printf *info, va_list ap)
@@ -72,7 +83,7 @@ const char	*checkprecision(const char *format, t_printf *info, va_list ap)
 			format++;
 		}
 	}
-	return (&(*format));
+	return (format);
 }
 
 const char	*checktype(const char *format, t_printf *info)
@@ -90,14 +101,7 @@ const char	*checktype(const char *format, t_printf *info)
 		info->number = 0;
 		format++;
 	}
-	else if (*format == '%')
-	{
-		info->type = 'c';
-		info->number = 0;
-		info->perc = 1;
-		format++;
-	}
-	return (&(*format));
+	return (format);
 }
 
 const char	*ft_fill_struct(const char *format, t_printf *info, va_list ap)
@@ -118,5 +122,5 @@ const char	*ft_fill_struct(const char *format, t_printf *info, va_list ap)
 	format = checkwidth(&(*format), info, ap);
 	format = checkprecision(&(*format), info, ap);
 	format = checktype(&(*format), info);
-	return (&(*format));
+	return (format);
 }

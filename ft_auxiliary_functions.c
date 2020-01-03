@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 16:28:16 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/03 16:33:38 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/03 17:39:41 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ const char	*print_boutsider(const char *format, t_printf *info)
 			format++;
 		}
 	}
-	format++;
+	if (*format == '%' && *(format + 1) != '%')
+		format++;
 	return (&(*format));
 }
 

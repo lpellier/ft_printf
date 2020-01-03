@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 11:52:38 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/03 16:40:34 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/03 17:48:31 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,13 @@ void	output_char(t_printf *info, va_list ap)
 {
 	char	res;
 
-	if (info->perc == 1)
-		res = '%';
+	if (info->perc > 0)
+	{
+		while (info->perc--)
+		{
+
+		}
+	}
 	else
 		res = va_arg(ap, int);
 	info->outputlen += 1;
