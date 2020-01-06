@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 16:36:54 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/03 16:37:39 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/06 14:41:54 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,27 @@ int		output_sign(t_printf *info, int res)
 	return (res);
 }
 
-void	put_zeros(t_printf *info, int len)
+void	put_zeros(t_printf *info)
 {
 	int		new;
 
-	if (info->precision > len)
+	if (info->precision > info->len)
 	{
-		new = info->precision - len;
+		new = info->precision - info->len;
 		while (new--)
 		{
 			ft_putchar_fd('0', 1);
 			info->outputlen++;
 		}
 	}
+}
+
+const char	*init_perc(t_printf *info, const char *format)
+{
+	info->type = 'c';
+	info->number = 0;
+	info->perc = 1;
+	info->count++;
+	format += 1;
+	return (format);
 }

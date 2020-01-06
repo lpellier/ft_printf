@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 10:56:30 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/03 16:52:41 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/06 16:00:49 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct		s_printf
 	int				space;
 	int				perc;
 	int				count;
+	int				len;
 	char			type;
 }					t_printf;
 
@@ -39,7 +40,6 @@ typedef struct		s_printf
 **----------------- Filling information -------------------
 */
 
-void				checklen(t_printf *info);
 const char			*checkwidth(const char *format, t_printf *info, va_list ap);
 const char			*checkprecision(const char *format, t_printf *info, \
 					va_list ap);
@@ -53,9 +53,9 @@ const char			*ft_fill_struct(const char *format, t_printf *info, \
 **--------------------------------------------------------------**
 */
 
-void				output_flags(t_printf *info, int len);
+void				output_flags(t_printf *info);
 int					output_sign(t_printf *info, int res);
-void				put_zeros(t_printf *info, int len);
+void				put_zeros(t_printf *info);
 void				output_string(t_printf *info, va_list ap);
 void				output_int(t_printf *info, va_list ap);
 void				output_uint(t_printf *info, va_list ap);
@@ -65,9 +65,9 @@ void				output_hexmin(t_printf *info, va_list ap);
 void				output_hexmax(t_printf *info, va_list ap);
 const char			*print_boutsider(const char *format, t_printf *info);
 const char			*print_aoutsider(const char *format, t_printf *info);
-void				check_padding_case_int(t_printf *info, int res, int len);
-void				check_padding_case_adress(t_printf *info, int len, \
-					void *res, char *str);
+const char			*init_perc(t_printf *info, const char *format);
+void				check_padding_case_int(t_printf *info, int res);
+void				check_padding_case_adress(t_printf *info, void *res, char *str);
 void				check_padding_case(t_printf *info);
 void				ft_output(t_printf *info, va_list ap);
 

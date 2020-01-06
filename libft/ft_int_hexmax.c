@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 15:32:27 by lpellier          #+#    #+#             */
-/*   Updated: 2019/12/21 15:43:17 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/06 12:26:29 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_int_hexmax(unsigned int n)
 	tab = "0123456789ABCDEF";
 	if (!(res = malloc(sizeof(char) * digit_count(n, 16) + 1)))
 		return (NULL);
-	while (n > 16)
+	while (n >= 16)
 	{
 		res[i] = tab[n % 16];
 		n /= 16;

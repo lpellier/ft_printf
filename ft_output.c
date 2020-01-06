@@ -6,23 +6,25 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 11:52:38 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/03 17:48:31 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/06 15:00:03 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	output_flags(t_printf *info, int len)
+void	output_flags(t_printf *info)
 {
 	int		padlength;
 
 	padlength = 0;
-	if (info->number == 0 && info->width > len)
-		padlength = info->width - len;
-	else if (info->number == 1 && info->width > len)
-		padlength = (info->width > info->precision && info->precision > len ? \
-		info->width - info->precision
-		: info->width - len);
+	if (info->number == 1 && info->precision > info->width)
+		padlength = 0;
+	else if (info->number == 0 && info->width > info->len)
+		padlength = info->width - info->len;
+	else if (info->number == 1 && info->width > info->len)
+		padlength = (info->width >= info->precision && \
+		info->precision > info->len ? \
+		info->width - info->precision : info->width - info->len);
 	if ((info->plus || info->minus || info->space) && padlength > 0)
 		padlength--;
 	info->outputlen += padlength;
@@ -37,37 +39,35 @@ void	output_flags(t_printf *info, int len)
 void	output_int(t_printf *info, va_list ap)
 {
 	int		res;
-	int		len;
 
 	res = va_arg(ap, int);
+	if (res == 0 && info->precision == 0)
+		res = ' ';
 	info->minus = (res < 0 ? 1 : 0);
-	len = ft_intlen(res);
-	info->outputlen += ((info->minus || info->plus) ? len + 1 : len);
-	check_padding_case_int(info, res, len);
+	info->len = ft_intlen(res);
+	info->outputlen += ((info->minus || info->plus) ? \
+	info->len + 1 : info->len);
+	check_padding_case_int(info, res);
 }
 
 void	output_char(t_printf *info, va_list ap)
 {
 	char	res;
 
-	if (info->perc > 0)
-	{
-		while (info->perc--)
-		{
-
-		}
-	}
+	if (info->perc == 1)
+		res = '%';
 	else
 		res = va_arg(ap, int);
 	info->outputlen += 1;
+	info->len = 1;
 	if (info->padding == 2)
 	{
 		ft_putchar_fd(res, 1);
-		output_flags(info, 1);
+		output_flags(info);
 	}
 	else
 	{
-		output_flags(info, 1);
+		output_flags(info);
 		ft_putchar_fd(res, 1);
 	}
 }
@@ -75,24 +75,15 @@ void	output_char(t_printf *info, va_list ap)
 void	output_adress(t_printf *info, va_list ap)
 {
 	void				*res;
-	int					len;
 	long unsigned int	a;
 	char				*str;
 
 	a = va_arg(ap, long unsigned int);
 	res = ft_lu_hexmin(a);
-	if (res == NULL || a == 0)
-	{
-		len = ft_strlen(res) + 2;
-		str = "0x";
-	}
-	else
-	{
-		len = ft_strlen(res) + 4;
-		str = "0x10";
-	}
-	info->outputlen += len;
-	check_padding_case_adress(info, len, res, str);
+	info->len = ft_strlen(res) + 2;
+	str = "0x";
+	info->outputlen += info->len;
+	check_padding_case_adress(info, res, str);
 }
 
 void	ft_output(t_printf *info, va_list ap)

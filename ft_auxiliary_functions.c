@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 16:28:16 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/03 17:39:41 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/06 15:43:00 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ const char	*print_aoutsider(const char *format, t_printf *info)
 		info->outputlen += 1;
 		format++;
 	}
-	return (&(*format));
+	return (format);
 }
 
 const char	*print_boutsider(const char *format, t_printf *info)
@@ -34,53 +34,51 @@ const char	*print_boutsider(const char *format, t_printf *info)
 			format++;
 		}
 	}
-	if (*format == '%' && *(format + 1) != '%')
-		format++;
-	return (&(*format));
+	format++;
+	return (format);
 }
 
-void		check_padding_case_int(t_printf *info, int res, int len)
+void		check_padding_case_int(t_printf *info, int res)
 {
 	if (info->padding == 2)
 	{
 		res = output_sign(info, res);
-		put_zeros(info, len);
+		put_zeros(info);
 		ft_putnbr_fd(res, 1);
-		output_flags(info, len);
+		output_flags(info);
 	}
 	else if (info->padding == 1)
 	{
 		res = (info->precision == -1 ? output_sign(info, res) : res);
-		output_flags(info, len);
+		output_flags(info);
 		res = (info->precision != -1 ? output_sign(info, res) : res);
-		put_zeros(info, len);
+		put_zeros(info);
 		ft_putnbr_fd(res, 1);
 	}
 	else
 	{
-		output_flags(info, len);
+		output_flags(info);
 		res = output_sign(info, res);
-		put_zeros(info, len);
+		put_zeros(info);
 		ft_putnbr_fd(res, 1);
 	}
 }
 
-void		check_padding_case_adress(t_printf *info, int len, void *res, \
-			char *str)
+void		check_padding_case_adress(t_printf *info, void *res, char *str)
 {
 	if (info->padding == 2)
 	{
-		put_zeros(info, len);
+		put_zeros(info);
 		ft_putstr_fd(str, 1);
-		ft_putnstr_fd(res, len, 1);
-		output_flags(info, len);
+		ft_putnstr_fd(res, info->len, 1);
+		output_flags(info);
 	}
 	else
 	{
-		output_flags(info, len);
-		put_zeros(info, len);
+		output_flags(info);
+		put_zeros(info);
 		ft_putstr_fd(str, 1);
-		ft_putnstr_fd(res, len, 1);
+		ft_putnstr_fd(res, info->len, 1);
 	}
 }
 
@@ -89,11 +87,11 @@ void		check_padding_case(t_printf *info)
 	if (info->padding == 2)
 	{
 		output_sign(info, 0);
-		output_flags(info, 0);
+		output_flags(info);
 	}
 	else
 	{
-		output_flags(info, 0);
+		output_flags(info);
 		output_sign(info, 0);
 	}
 }

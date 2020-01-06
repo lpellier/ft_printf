@@ -6,22 +6,11 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 10:29:31 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/03 17:49:41 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/06 15:00:12 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-
-const char	*init_perc(t_printf *info, const char *format)
-{
-	info->type = 'c';
-	info->number = 0;
-	info->perc += 1;
-	printf("format before = %s\n", format);
-	format += 2;
-	printf("format = %s\n", format);
-	return (format);
-}
 
 const char	*checkflags(const char *format, t_printf *info)
 {
@@ -58,6 +47,11 @@ const char	*checkwidth(const char *format, t_printf *info, va_list ap)
 	else if (*format == '*')
 	{
 		info->width = va_arg(ap, int);
+		if (info->width < 0)
+		{
+			info->width *= -1;
+			info->padding = 2;
+		}
 		format++;
 	}
 	return (format);
@@ -82,12 +76,19 @@ const char	*checkprecision(const char *format, t_printf *info, va_list ap)
 			info->precision = va_arg(ap, int);
 			format++;
 		}
+		if (info->precision < 0 && info->precision != -1)
+			info->precision = -1;
 	}
 	return (format);
 }
 
 const char	*checktype(const char *format, t_printf *info)
 {
+	if (*format == '%')
+	{
+		format = init_perc(info, format);
+		return (format);
+	}
 	if (*format == 'p' || *format == 'd' || *format == 'i'
 	|| *format == 'u' || *format == 'x' || *format == 'X')
 	{
@@ -101,6 +102,8 @@ const char	*checktype(const char *format, t_printf *info)
 		info->number = 0;
 		format++;
 	}
+	if (info->precision == 0 && info->number == 1)
+		info->precision = -1;
 	return (format);
 }
 
@@ -118,9 +121,9 @@ const char	*ft_fill_struct(const char *format, t_printf *info, va_list ap)
 		while (*format == ' ')
 			format++;
 	}
-	format = checkflags(&(*format), info);
-	format = checkwidth(&(*format), info, ap);
-	format = checkprecision(&(*format), info, ap);
-	format = checktype(&(*format), info);
+	format = checkflags(format, info);
+	format = checkwidth(format, info, ap);
+	format = checkprecision(format, info, ap);
+	format = checktype(format, info);
 	return (format);
 }

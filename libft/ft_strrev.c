@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 14:50:42 by lpellier          #+#    #+#             */
-/*   Updated: 2019/12/02 15:21:09 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/06 14:17:01 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strrev(char *str)
 	len = ft_strlen(str) - 1;
 	i = 0;
 	count = len;
-	while (count - i / 2 > 0)
+	while (count - i / 2 - 1 > 0)
 	{
 		temp = str[i];
 		str[i] = str[len - i];

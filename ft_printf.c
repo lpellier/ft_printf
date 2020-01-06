@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 10:56:23 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/03 14:40:32 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/06 16:10:31 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 **	Type :
 **	c = Character;													--> fait
 **	s =	String;														--> fait
-**	p =	Pointer Type -> output arg under the form of an adress
+**	p =	Pointer Type -> output arg under the form of an adress		--> fait
 **		containing hexadecimal numbers;
 **	d = Int decimal;												--> fait
 **	i = same as d;													--> fait
@@ -82,6 +82,7 @@ void	ft_init_info(t_printf *info)
 	info->minus = 0;
 	info->perc = 0;
 	info->space = 0;
+	info->len = 0;
 	info->type = 48;
 }
 
@@ -93,7 +94,7 @@ int		ft_printf(const char *format, ...)
 	t_printf	*info;
 	int			written;
 
-	if (!(info = (t_printf *)malloc(sizeof(t_printf) * count_format(format))))
+	if (!(info = (t_printf *)malloc(sizeof(t_printf))))
 		return (-1);
 	info->count = count_format(format);
 	info->outputlen = 0;
