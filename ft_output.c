@@ -84,6 +84,7 @@ void	output_adress(t_printf *info, va_list ap)
 	str = "0x";
 	info->outputlen += info->len;
 	check_padding_case_adress(info, res, str);
+	free(res);
 }
 
 void	ft_output(t_printf *info, va_list ap)

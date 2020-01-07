@@ -12,7 +12,11 @@
 
 NAME = libftprintf.a
 
+LIBFT = libft/libft.a
+
 FLAGS = -Wall -Werror -Wextra
+
+LIBSRCS = ./libft/*.c
 
 SRCS =	./ft_printf.c \
 		./ft_fill_struct.c \
@@ -23,9 +27,11 @@ SRCS =	./ft_printf.c \
 
 OBJS = $(SRCS:.c=.o)
 
+LIBOBJS = $(LIBSRCS:.c=.o)
+
 all : $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) $(LIBOBJS)
 	@make -C libft
 	@cp libft/libft.a ./$(NAME)
 	@ar rc $(NAME) $(OBJS)

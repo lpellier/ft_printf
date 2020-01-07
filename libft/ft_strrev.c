@@ -14,21 +14,21 @@
 
 char	*ft_strrev(char *str)
 {
-	int		len;
-	char	temp;
-	int		i;
-	int		count;
+	int	count;
+	int	i;
+	char	c;
 
-	len = ft_strlen(str) - 1;
+	count = 0;
+	while (str[count] != '\0')
+		count++;
+	count -= 1;
 	i = 0;
-	count = len;
-	while (count - i / 2 - 1 > 0)
+	while (i < ((count + 1) / 2))
 	{
-		temp = str[i];
-		str[i] = str[len - i];
-		str[len - i] = temp;
+		c = str[i];
+		str[i] = str[count - i];
+		str[count - i] = c;
 		i++;
-		count--;
 	}
 	return (str);
 }

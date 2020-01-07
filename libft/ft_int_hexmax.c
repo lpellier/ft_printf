@@ -16,18 +16,23 @@ char	*ft_int_hexmax(unsigned int n)
 {
 	char			*res;
 	char			*tab;
+	int			taille;
 	int				i;
 
 	i = 0;
-	tab = "0123456789ABCDEF";
-	if (!(res = malloc(sizeof(char) * digit_count(n, 16) + 1)))
-		return (NULL);
-	while (n >= 16)
+	taille = digit_count(n, 16);
+	tab = ft_strdup("0123456789ABCDEF");
+	if (!(res = (char *)calloc(1, (sizeof(char) * (taille + 1)))))
 	{
-		res[i] = tab[n % 16];
-		n /= 16;
-		i++;
+		free(tab);
+		return (NULL);
 	}
-	res[i] = tab[n];
-	return (ft_strrev(res));
+	taille--;
+	while (n)
+	{
+		res[taille - i++] = tab[n % 16];
+		n /= 16;
+	}
+	free(tab);
+	return (res);
 }

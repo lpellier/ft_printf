@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <string.h>
 
 void	output_string(t_printf *info, va_list ap)
 {
@@ -20,7 +19,7 @@ void	output_string(t_printf *info, va_list ap)
 	res = va_arg(ap, char *);
 	if (res == NULL)
 		res = "(null)";
-	info->len = (res == NULL ? 6 : strlen(res));
+	info->len = (res == NULL ? 6 : ft_strlen(res));
 	if (info->precision > info->width && info->width != 0)
 		info->precision = -1;
 	info->len = (info->precision < info->len && info->precision != -1 ? \
@@ -90,6 +89,7 @@ void	output_hexmin(t_printf *info, va_list ap)
 		put_zeros(info);
 		ft_putnstr_fd(res, info->len, 1);
 	}
+	free(res);
 }
 
 void	output_hexmax(t_printf *info, va_list ap)
@@ -117,4 +117,5 @@ void	output_hexmax(t_printf *info, va_list ap)
 		put_zeros(info);
 		ft_putnstr_fd(res, info->len, 1);
 	}
+	free(res);
 }

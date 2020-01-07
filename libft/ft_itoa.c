@@ -30,13 +30,9 @@ int		ft_countchar(int n)
 char	*ft_int_str(char *str, int n, int len)
 {
 	int		start;
-	int		s;
-	int		count;
 
 	str[len] = '\0';
-	s = 0;
 	len -= 1;
-	count = len;
 	if (n < 0)
 	{
 		n *= -1;
