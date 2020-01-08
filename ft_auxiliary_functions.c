@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 16:28:16 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/06 15:43:00 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/08 17:16:59 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,6 @@ const char	*print_aoutsider(const char *format, t_printf *info)
 		ft_putchar_fd(*format, 1);
 		info->outputlen += 1;
 		format++;
-	}
-	return (format);
-}
-
-const char	*print_boutsider(const char *format, t_printf *info)
-{
-	if (*format != '%')
-	{
-		while (*format != '%' && *format)
-		{
-			ft_putchar_fd(*format, 1);
-			info->outputlen += 1;
-			format++;
-		}
 	}
 	format++;
 	return (format);

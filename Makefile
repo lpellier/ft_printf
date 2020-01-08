@@ -6,7 +6,7 @@
 #    By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/28 12:48:13 by lpellier          #+#    #+#              #
-#    Updated: 2020/01/03 16:43:14 by lpellier         ###   ########.fr        #
+#    Updated: 2020/01/08 11:12:12 by lpellier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,6 @@ NAME = libftprintf.a
 LIBFT = libft/libft.a
 
 FLAGS = -Wall -Werror -Wextra
-
-LIBSRCS = ./libft/*.c
 
 SRCS =	./ft_printf.c \
 		./ft_fill_struct.c \
@@ -27,11 +25,9 @@ SRCS =	./ft_printf.c \
 
 OBJS = $(SRCS:.c=.o)
 
-LIBOBJS = $(LIBSRCS:.c=.o)
-
 all : $(NAME)
 
-$(NAME) : $(OBJS) $(LIBOBJS)
+$(NAME) : $(OBJS)
 	@make -C libft
 	@cp libft/libft.a ./$(NAME)
 	@ar rc $(NAME) $(OBJS)

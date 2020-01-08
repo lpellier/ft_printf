@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 10:56:23 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/06 16:10:31 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/08 18:44:15 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,39 @@
 **	ETAPE 7 : PROFIT!;
 */
 
+int		ft_isinset(char c, char *set)
+{
+	int i;
+
+	i = 0;
+	while (set[i])
+	{
+		if (set[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int		count_format(const char *format)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (*format)
 	{
-		if (*format == '%' && *(format + 1) != '%')
-			count++;
+		if (*format == '%')
+		{
+			format++;
+			while (!ft_isinset(*format, CONVERTER) && *format)
+				format++;
+			count = ft_isinset(*format, CONVERTER) ? count + 1 : count;
+		}
 		format++;
 	}
 	return (count);
 }
+
 
 void	ft_init_info(t_printf *info)
 {
@@ -89,27 +109,22 @@ void	ft_init_info(t_printf *info)
 int		ft_printf(const char *format, ...)
 {
 	va_list		ap;
-	const char	*test;
-	int			i;
 	t_printf	*info;
 	int			written;
 
 	if (!(info = (t_printf *)malloc(sizeof(t_printf))))
 		return (-1);
-	info->count = count_format(format);
+	info->count = (count_format(format) == 1 ? 1 : count_format(format) + 1);
 	info->outputlen = 0;
-	i = 0;
 	va_start(ap, format);
-	test = print_boutsider(format, info);
-	while (i++ < info->count)
+	format = (*format == '%' ? format + 1 : format);
+	while (info->count--)
 	{
 		ft_init_info(info);
-		test = ft_fill_struct(&(*test), info, ap);
+		format = ft_fill_struct(format, info, ap);
 		ft_output(info, ap);
-		test = print_aoutsider(test, info);
-		test++;
+		format = print_aoutsider(format, info);
 	}
-	va_end(ap);
 	written = info->outputlen;
 	free(info);
 	return (written);

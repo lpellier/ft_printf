@@ -6,29 +6,27 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 14:50:42 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/06 14:17:01 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/08 17:54:29 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrev(char *str)
+char		*ft_strrev(char *str)
 {
-	int	count;
-	int	i;
-	char	c;
+	int		i;
+	int		l;
+	char	t;
 
-	count = 0;
-	while (str[count] != '\0')
-		count++;
-	count -= 1;
-	i = 0;
-	while (i < ((count + 1) / 2))
+	l = 0;
+	while (str[l] != '\0')
+		l++;
+	i = -1;
+	while (++i < --l)
 	{
-		c = str[i];
-		str[i] = str[count - i];
-		str[count - i] = c;
-		i++;
+		t = str[i];
+		str[i] = str[l];
+		str[l] = t;
 	}
 	return (str);
 }

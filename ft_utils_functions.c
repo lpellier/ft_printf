@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -51,7 +52,6 @@ const char	*init_perc(t_printf *info, const char *format)
 	info->type = 'c';
 	info->number = 0;
 	info->perc = 1;
-	info->count++;
 	format += 1;
 	return (format);
 }

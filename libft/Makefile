@@ -49,7 +49,6 @@ SRCS	=		./ft_atoi.c \
 				./ft_strrev.c \
 				./ft_int_hexmin.c \
 				./ft_int_hexmax.c \
-				./ft_lu_hexmin.c \
 				./ft_putnnbr_fd.c \
 				./ft_putnstr_fd.c \
 				./digit_count.c \

@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 16:34:26 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/06 16:34:32 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/08 18:45:44 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	output_string(t_printf *info, va_list ap)
 {
 	char	*res;
 
-	res = va_arg(ap, char *);
+	res = (char *)va_arg(ap, char *);
 	if (res == NULL)
 		res = "(null)";
-	info->len = (res == NULL ? 6 : ft_strlen(res));
+	info->len = (int)ft_strlen(res);
 	if (info->precision > info->width && info->width != 0)
 		info->precision = -1;
 	info->len = (info->precision < info->len && info->precision != -1 ? \
@@ -41,7 +41,7 @@ void	output_uint(t_printf *info, va_list ap)
 {
 	unsigned int	res;
 
-	res = va_arg(ap, int);
+	res = va_arg(ap, unsigned int);
 	info->len = ft_uintlen(res);
 	info->outputlen += (info->plus ? info->len + 1 : info->len);
 	if (info->padding == 2)
@@ -68,7 +68,7 @@ void	output_hexmin(t_printf *info, va_list ap)
 {
 	char	*res;
 
-	res = ft_int_hexmin(va_arg(ap, int));
+	res = ft_int_hexmin(va_arg(ap, long), "0123456789abcdef");
 	info->len = ft_strlen(res);
 	info->outputlen += info->len;
 	if (info->padding == 2)
@@ -96,7 +96,7 @@ void	output_hexmax(t_printf *info, va_list ap)
 {
 	char	*res;
 
-	res = ft_int_hexmax(va_arg(ap, int));
+	res = ft_int_hexmax(va_arg(ap, long), "0123456789ABCDEF");
 	info->len = ft_strlen(res);
 	info->outputlen += info->len;
 	if (info->padding == 2)

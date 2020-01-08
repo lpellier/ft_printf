@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 11:52:38 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/06 15:00:03 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/08 18:50:43 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	output_char(t_printf *info, va_list ap)
 
 	if (info->perc == 1)
 		res = '%';
-	else
+	else if (info->perc == 0)
 		res = va_arg(ap, int);
 	info->outputlen += 1;
 	info->len = 1;
@@ -75,13 +75,16 @@ void	output_char(t_printf *info, va_list ap)
 void	output_adress(t_printf *info, va_list ap)
 {
 	void				*res;
-	long unsigned int	a;
+	long				a;
 	char				*str;
 
-	a = va_arg(ap, long unsigned int);
-	res = ft_lu_hexmin(a);
-	info->len = ft_strlen(res) + 2;
-	str = "0x";
+	a = va_arg(ap, long);
+	if (a < 0)
+		str = "0xffffffffffff";
+	else
+		str = "0x";
+	res = ft_int_hexmin(a, "0123456789abcdef");
+	info->len = ft_strlen(res) + ft_strlen(str);
 	info->outputlen += info->len;
 	check_padding_case_adress(info, res, str);
 	free(res);
