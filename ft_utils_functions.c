@@ -55,3 +55,4 @@ const char	*init_perc(t_printf *info, const char *format)
 	format += 1;
 	return (format);
 }
+

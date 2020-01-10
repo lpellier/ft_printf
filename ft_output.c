@@ -72,6 +72,27 @@ void	output_char(t_printf *info, va_list ap)
 	}
 }
 
+char	*negative_adress(int len)
+{
+	int	i;
+	int	diff;
+	char	*str;
+
+	i = 2;
+	diff = 16 - len;
+	if (!(str = malloc(sizeof(char) * (19 - len))))
+		return (NULL);
+	str[0] = '0';
+	str[1] = 'x';
+	while (diff--)
+	{
+		str[i] = 'f';
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
 void	output_adress(t_printf *info, va_list ap)
 {
 	void				*res;
@@ -79,15 +100,17 @@ void	output_adress(t_printf *info, va_list ap)
 	char				*str;
 
 	a = va_arg(ap, long);
+	res = ft_int_hexmin(a, "0123456789abcdef");
 	if (a < 0)
-		str = "0xffffffffffff";
+		str = negative_adress(ft_strlen(res));
 	else
 		str = "0x";
-	res = ft_int_hexmin(a, "0123456789abcdef");
 	info->len = ft_strlen(res) + ft_strlen(str);
 	info->outputlen += info->len;
 	check_padding_case_adress(info, res, str);
 	free(res);
+	if (a < 0)
+		free(str);
 }
 
 void	ft_output(t_printf *info, va_list ap)
