@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 10:56:23 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/08 18:44:15 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/21 19:34:09 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int		count_format(const char *format)
 	return (count);
 }
 
-
 void	ft_init_info(t_printf *info)
 {
 	info->padding = 0;
@@ -123,7 +122,10 @@ int		ft_printf(const char *format, ...)
 		ft_init_info(info);
 		format = ft_fill_struct(format, info, ap);
 		ft_output(info, ap);
-		format = print_aoutsider(format, info);
+		if (info->count != 0)
+			format = print_aoutsider(format, info);
+		else
+			print_aoutsider(format, info);
 	}
 	written = info->outputlen;
 	free(info);

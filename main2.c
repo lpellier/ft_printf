@@ -6,12 +6,12 @@ int main()
 	//printf("Count = %d\n", count_format(str));
 	//char *str = "3TW/30=:";
 
-	ft_printf("%*d\n", 10, 55);
+//	ft_printf("%*d\n", 10, 55);
 //	printf("%*d", 10, 55);
 
-	ft_printf("%.*d\n", 5, 55);
+//	ft_printf("%.*d\n", 5, 55);
 
-	ft_printf("%-*.*d\n", 10, 5, 55);
+//	ft_printf("%-*.*d\n", 10, 5, 55);
 //	ft_printf("||%*X%9x%9pr ?)i%-*u%-7.s$\n",-20, -8269, 8509, (void *)4132, 20, -1854, "3TW/30=:");
 //	printf("||%*X%9x%9pr ?)i%-*u%-7.s%%%%%%%%%%%*u%%%%%%$\n",-20, -8269, 8509, (void *)4132, 20, -1854, "3TW/30=:", 18, 4538);
 
@@ -62,6 +62,6 @@ int main()
 //	ft_printf("%%%%%%%%%-*itxPsFT&/tx{==0d%%%%%%%%%-.*X%-18x%1.u\n", 16, 8068, 4, -9834, 2862, 9240);
 //	printf("%%%%%%%%%-*itxPsFT&/tx{==0d%%%%%%%%%-.*X%-18x%1.u\n", 16, 8068, 4, -9834, 2862, 9240);
 
-//	ft_printf("%10s.3V@0GXr%%%%%%%%%%zVSAb];%%%%%%%%%%%%%%%%\n", "LAnR7ZL9Ve");
-//	printf("%10s.3V@0GXr%%%%%%%%%%zVSAb];%%%%%%%%%%%%%%%%\n", "LAnR7ZL9Ve");
+	ft_printf("%10s.3V@0GXr%%%%%%%%%%zVSAb];%%%%%%%%%%%%%%%%\n", "LAnR7ZL9Ve");
+	printf("%10s.3V@0GXr%%%%%%%%%%zVSAb];%%%%%%%%%%%%%%%%\n", "LAnR7ZL9Ve");
 }

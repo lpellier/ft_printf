@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 16:28:16 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/08 17:16:59 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/21 19:34:12 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ const char	*print_aoutsider(const char *format, t_printf *info)
 		info->outputlen += 1;
 		format++;
 	}
-	format++;
+	if (*format != '\0')
+		format++;
 	return (format);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 11:52:38 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/08 18:50:43 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/21 19:44:29 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	output_char(t_printf *info, va_list ap)
 
 char	*negative_adress(int len)
 {
-	int	i;
-	int	diff;
+	int		i;
+	int		diff;
 	char	*str;
 
 	i = 2;
