@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 10:56:30 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/08 17:17:08 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/23 16:21:50 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,13 @@ void				output_char(t_printf *info, va_list ap);
 void				output_adress(t_printf *info, va_list ap);
 void				output_hexmin(t_printf *info, va_list ap);
 void				output_hexmax(t_printf *info, va_list ap);
+const char			*print_before(const char *format, t_printf *info);
 const char			*print_aoutsider(const char *format, t_printf *info);
 const char			*init_perc(t_printf *info, const char *format);
 void				check_padding_case_int(t_printf *info, int res);
-void				check_padding_case_adress(t_printf *info, void *res, char *str);
+void				check_padding_case_adress(t_printf *info, void *res, \
+					char *str);
+void				check_padding_case_hex(t_printf *info, void *ret);
 void				check_padding_case(t_printf *info);
 void				ft_output(t_printf *info, va_list ap);
 

@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 15:32:27 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/23 11:28:26 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/23 15:49:37 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char	*ft_int_hexmax(long n, char *tab)
 			res[taille - i++] = tab[n % 16];
 			n /= 16;
 		}
+		res[taille + 1] = '\0';
 		return (res);
 	}
 	return ("0");

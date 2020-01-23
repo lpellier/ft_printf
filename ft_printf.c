@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 10:56:23 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/23 11:02:21 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/23 15:38:35 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,7 @@ int		ft_printf(const char *format, ...)
 	info->count = (count_format(format) == 1 ? 1 : count_format(format) + 1);
 	info->outputlen = 0;
 	va_start(ap, format);
-	info->count += (*format != '%' && info->count == 1 ? 1 : 0);
-	format = (*format == '%' ? format + 1 : format);
+	format = (*format == '%' ? format + 1 : print_before(format, info));
 	while (info->count--)
 	{
 		ft_init_info(info);

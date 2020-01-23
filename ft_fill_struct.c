@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 10:29:31 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/23 10:43:46 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/23 16:17:12 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ const char	*ft_fill_struct(const char *format, t_printf *info, va_list ap)
 		while (*format == ' ')
 			format++;
 	}
-//	printf("format = %s\n", format);
 	format = checkflags(format, info);
 	format = checkwidth(format, info, ap);
 	format = checkprecision(format, info, ap);

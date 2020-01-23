@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 16:34:26 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/23 11:26:40 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/23 16:21:32 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@ void	output_string(t_printf *info, va_list ap)
 	if (res == NULL)
 		res = "(null)";
 	info->len = (int)ft_strlen(res);
-	if (info->width == 1 && info->precision != -1)
-		info->width = info->precision;
-	if (info->precision > info->width && info->width != 0)
-		info->precision = -1;
 	info->len = (info->precision < info->len && info->precision != -1 ? \
 	info->precision : info->len);
 	info->outputlen += info->len;
@@ -66,58 +62,59 @@ void	output_uint(t_printf *info, va_list ap)
 	}
 }
 
+char	*fill_f(char *res, long a, int size)
+{
+	int		i;
+	int		diff;
+	char	*str;
+	char	*ret;
+
+	if (a < 0)
+	{
+		i = 0;
+		diff = 8 - ft_strlen(res);
+		if (!(str = malloc(sizeof(char) * (8 - diff))))
+			return (NULL);
+		while (diff--)
+		{
+			if (size == 10)
+				str[i] = 'F';
+			else
+				str[i] = 'f';
+			i++;
+		}
+		ret = ft_strdup(ft_strjoin(str, res));
+		return (ret);
+	}
+	return (res);
+}
+
 void	output_hexmin(t_printf *info, va_list ap)
 {
 	char	*res;
+	char	*ret;
+	long	a;
 
-	res = ft_int_hexmin(va_arg(ap, long), "0123456789abcdef");
-	info->len = ft_strlen(res);
+	a = va_arg(ap, int);
+	res = ft_int_hexmin(a, "0123456789abcdef");
+	ret = fill_f(res, a, 0);
+	info->len = ft_strlen(ret);
 	info->outputlen += info->len;
-	if (info->padding == 2)
-	{
-		put_zeros(info);
-		ft_putnstr_fd(res, info->len, 1);
-		output_flags(info);
-	}
-	else if (info->padding == 1)
-	{
-		output_flags(info);
-		put_zeros(info);
-		ft_putnstr_fd(res, info->len, 1);
-	}
-	else
-	{
-		output_flags(info);
-		put_zeros(info);
-		ft_putnstr_fd(res, info->len, 1);
-	}
+	check_padding_case_hex(info, ret);
 	free(res);
 }
 
 void	output_hexmax(t_printf *info, va_list ap)
 {
 	char	*res;
+	char	*ret;
+	long	a;
 
-	res = ft_int_hexmax(va_arg(ap, long), "0123456789ABCDEF");
-	info->len = ft_strlen(res);
+	a = va_arg(ap, int);
+	res = ft_int_hexmax(a, "0123456789ABCDEF");
+	ret = fill_f(res, a, 10);
+	info->len = ft_strlen(ret);
 	info->outputlen += info->len;
-	if (info->padding == 2)
-	{
-		put_zeros(info);
-		ft_putnstr_fd(res, info->len, 1);
-		output_flags(info);
-	}
-	else if (info->padding == 1)
-	{
-		output_flags(info);
-		put_zeros(info);
-		ft_putnstr_fd(res, info->len, 1);
-	}
-	else
-	{
-		output_flags(info);
-		put_zeros(info);
-		ft_putnstr_fd(res, info->len, 1);
-	}
+	check_padding_case_hex(info, ret);
 	free(res);
 }

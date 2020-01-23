@@ -6,11 +6,22 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 16:28:16 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/23 10:49:41 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/23 12:12:17 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+
+const char	*print_before(const char *format, t_printf *info)
+{
+	while (*format != '%' && *format != '\0')
+	{
+		ft_putchar_fd(*format, 1);
+		info->outputlen++;
+		format++;
+	}
+	return (format + 1);
+}
 
 const char	*print_aoutsider(const char *format, t_printf *info)
 {

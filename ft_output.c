@@ -6,35 +6,11 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 11:52:38 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/23 11:06:06 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/23 16:18:39 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-
-void	output_flags(t_printf *info)
-{
-	int		padlength;
-
-	padlength = 0;
-	if (info->number == 1 && info->precision > info->width)
-		padlength = 0;
-	else if (info->number == 0 && info->width > info->len)
-		padlength = info->width - info->len;
-	else if (info->number == 1 && info->width > info->len)
-		padlength = (info->width >= info->precision && \
-		info->precision > info->len ? \
-		info->width - info->precision : info->width - info->len);
-	if ((info->plus || info->minus || info->space) && padlength > 0)
-		padlength--;
-	info->outputlen += padlength;
-	if (info->padding != 1 || (info->number == 1 && info->precision != -1))
-		while (padlength--)
-			ft_putchar_fd(' ', 1);
-	else
-		while (padlength--)
-			ft_putchar_fd('0', 1);
-}
 
 void	output_int(t_printf *info, va_list ap)
 {
