@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 16:34:26 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/08 18:45:44 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/23 11:26:40 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	output_string(t_printf *info, va_list ap)
 	if (res == NULL)
 		res = "(null)";
 	info->len = (int)ft_strlen(res);
+	if (info->width == 1 && info->precision != -1)
+		info->width = info->precision;
 	if (info->precision > info->width && info->width != 0)
 		info->precision = -1;
 	info->len = (info->precision < info->len && info->precision != -1 ? \

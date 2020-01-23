@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 10:56:23 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/21 19:34:09 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/23 11:02:21 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 **	ETAPE 2 : GESTION DE LA WIDTH;		 				--> fait
 **	ETAPE 3 : GESTION DES FLAGS;						--> fait
 **	ETAPE 4 ; GESTION DE LA PRECISION;					--> fait
-**	ETAPE 5 : GESTION D'ERREURS;
+**	ETAPE 5 : GESTION D'ERREURS;						--> fait
 **	ETAPE INTERMEDIAIRE GERER LE PRINT DANS FORMAT;		--> fait
 **	ETAPE 6 : GERER PLUSIEURS ARGUMENTS;				--> fait
 **	ETAPE 7 : PROFIT!;
@@ -116,6 +116,7 @@ int		ft_printf(const char *format, ...)
 	info->count = (count_format(format) == 1 ? 1 : count_format(format) + 1);
 	info->outputlen = 0;
 	va_start(ap, format);
+	info->count += (*format != '%' && info->count == 1 ? 1 : 0);
 	format = (*format == '%' ? format + 1 : format);
 	while (info->count--)
 	{
