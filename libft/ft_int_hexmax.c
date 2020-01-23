@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 15:32:27 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/23 15:49:37 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/23 16:56:08 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ char	*ft_int_hexmax(long n, char *tab)
 
 	if (n < 0)
 		return (ft_int_hexmax((-n - 1), "FEDCBA9876543210"));
-	else if (n >= 0)
+	else if (n > 0)
 	{
 		i = 0;
 		taille = digit_count(n, 16);
-		if (!(res = (char *)calloc(1, (sizeof(char) * (taille + 1)))))
+		if (!(res = (char *)ft_calloc(1, (sizeof(char) * (taille + 1)))))
 			return (NULL);
 		taille--;
 		while (n)
@@ -35,5 +35,5 @@ char	*ft_int_hexmax(long n, char *tab)
 		res[taille + 1] = '\0';
 		return (res);
 	}
-	return ("0");
+	return (ft_strdup("0"));
 }

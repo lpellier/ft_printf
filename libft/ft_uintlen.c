@@ -6,11 +6,11 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 12:35:26 by lpellier          #+#    #+#             */
-/*   Updated: 2019/12/02 16:26:21 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/23 17:02:24 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_uintlen(unsigned int n)
+int		ft_uintlen(unsigned long n)
 {
 	int		count;
 

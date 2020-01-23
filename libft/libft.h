@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 15:15:06 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/23 15:06:17 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/23 17:02:16 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ char				*ft_itoa(int n);
 char				*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 char				**ft_split(const char *s, char c);
 int					ft_lstsize(t_list *lst);
-int					ft_intlen(int n);
-int					ft_uintlen(unsigned int n);
+int					ft_intlen(long n);
+int					ft_uintlen(unsigned long n);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_strlen(const char *s);

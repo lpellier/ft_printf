@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 10:56:23 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/23 15:38:35 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/23 17:15:58 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,15 @@ int		ft_printf(const char *format, ...)
 
 	if (!(info = (t_printf *)malloc(sizeof(t_printf))))
 		return (-1);
-	info->count = (count_format(format) == 1 ? 1 : count_format(format) + 1);
 	info->outputlen = 0;
+	if (count_format(format) == 0)
+	{
+		print_before(format, info);
+		written = info->outputlen;
+		free(info);
+		return (written);
+	}
+	info->count = (count_format(format) == 1 ? 1 : count_format(format) + 1);
 	va_start(ap, format);
 	format = (*format == '%' ? format + 1 : print_before(format, info));
 	while (info->count--)
@@ -127,6 +134,7 @@ int		ft_printf(const char *format, ...)
 		else
 			print_aoutsider(format, info);
 	}
+	va_end(ap);
 	written = info->outputlen;
 	free(info);
 	return (written);

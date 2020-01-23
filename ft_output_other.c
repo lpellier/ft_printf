@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 16:34:26 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/23 16:21:32 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/23 18:02:18 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ char	*fill_f(char *res, long a, int size)
 				str[i] = 'f';
 			i++;
 		}
-		ret = ft_strdup(ft_strjoin(str, res));
+		str[i] = '\0';
+		ret = ft_strjoin(str, res);
+		free(str);
 		return (ret);
 	}
 	return (res);
