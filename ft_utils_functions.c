@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 16:36:54 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/23 16:22:19 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/28 14:28:43 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ void		output_flags(t_printf *info)
 	if ((info->plus || info->minus || info->space) && padlength > 0)
 		padlength--;
 	info->outputlen += padlength;
+	if (info->padding == 1 && info->precision != -1 \
+		&& info->precision < info->len)
+		info->padding = 3;
 	if (info->padding != 1 || (info->number == 1 && info->precision != -1))
 		while (padlength--)
 			ft_putchar_fd(' ', 1);

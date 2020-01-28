@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 10:56:23 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/23 17:15:58 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/28 15:05:03 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,22 @@ void	ft_init_info(t_printf *info)
 	info->perc = 0;
 	info->space = 0;
 	info->len = 0;
+	info->orig = 0;
 	info->type = 48;
+}
+
+void	ft_parse_and_print(const char *format, t_printf *info, va_list ap)
+{
+	while (info->count--)
+	{
+		ft_init_info(info);
+		format = ft_fill_struct(format, info, ap);
+		ft_output(info, ap);
+		if (info->count != 0)
+			format = print_aoutsider(format, info);
+		else
+			print_aoutsider(format, info);
+	}
 }
 
 int		ft_printf(const char *format, ...)
@@ -121,19 +136,10 @@ int		ft_printf(const char *format, ...)
 		free(info);
 		return (written);
 	}
-	info->count = (count_format(format) == 1 ? 1 : count_format(format) + 1);
 	va_start(ap, format);
+	info->count = (count_format(format) == 1 ? 1 : count_format(format) + 1);
 	format = (*format == '%' ? format + 1 : print_before(format, info));
-	while (info->count--)
-	{
-		ft_init_info(info);
-		format = ft_fill_struct(format, info, ap);
-		ft_output(info, ap);
-		if (info->count != 0)
-			format = print_aoutsider(format, info);
-		else
-			print_aoutsider(format, info);
-	}
+	ft_parse_and_print(format, info, ap);
 	va_end(ap);
 	written = info->outputlen;
 	free(info);

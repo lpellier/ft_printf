@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 11:52:38 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/23 16:18:39 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/28 15:21:36 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,13 @@ void	output_int(t_printf *info, va_list ap)
 	int		res;
 
 	res = va_arg(ap, int);
+	if (info->orig == 1)
+		info->precision = 0;
 	if (res == 0 && info->precision == 0)
-		res = ' ';
+	{
+		output_flags(info);
+		return ;
+	}
 	info->minus = (res < 0 ? 1 : 0);
 	info->len = ft_intlen(res);
 	info->outputlen += ((info->minus || info->plus) ? \
@@ -76,6 +81,13 @@ void	output_adress(t_printf *info, va_list ap)
 	char				*str;
 
 	a = va_arg(ap, long);
+	if (info->orig == 1)
+		info->precision = 0;
+	if (a == 0 && info->precision == 0)
+	{
+		check_padding_case_adress(info, "\0", "0x");
+		return ;
+	}
 	res = ft_int_hexmin(a, "0123456789abcdef");
 	if (a < 0)
 		str = negative_adress(ft_strlen(res));

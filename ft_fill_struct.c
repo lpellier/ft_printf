@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 10:29:31 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/23 16:17:12 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/28 14:08:13 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,10 @@ const char	*checktype(const char *format, t_printf *info)
 		format++;
 	}
 	if (info->precision == 0 && info->number == 1)
+	{
 		info->precision = -1;
+		info->orig = 1;
+	}
 	return (format);
 }
 

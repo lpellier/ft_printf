@@ -6,7 +6,7 @@
 /*   By: lpellier <lpellier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 10:56:30 by lpellier          #+#    #+#             */
-/*   Updated: 2020/01/23 16:21:50 by lpellier         ###   ########.fr       */
+/*   Updated: 2020/01/28 13:55:46 by lpellier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct		s_printf
 	int				perc;
 	int				count;
 	int				len;
+	int				orig;
 	char			type;
 }					t_printf;
 
